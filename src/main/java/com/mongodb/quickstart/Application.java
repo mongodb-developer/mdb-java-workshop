@@ -7,6 +7,14 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 
+import com.mongodb.quickstart.services.AverageCustomerSatisfactionService;
+import com.mongodb.quickstart.services.AverageItemPricePerStoreService;
+import com.mongodb.quickstart.services.CountDistinctCustomersService;
+import com.mongodb.quickstart.services.RevenueByLocationService;
+import com.mongodb.quickstart.services.SalesPerformanceService;
+import com.mongodb.quickstart.services.TotalSalesByDayOfWeekService;
+import com.mongodb.quickstart.services.TotalSalesByLocationService;
+
 @SpringBootApplication
 @ComponentScan(basePackages = "com.mongodb.quickstart")
 public class Application implements CommandLineRunner {
@@ -36,6 +44,27 @@ public class Application implements CommandLineRunner {
                 break;
             case "update":
                 context.getBean(Update.class).run();
+                break;
+            case "total-sales-by-location":
+                context.getBean(TotalSalesByLocationService.class).run();
+                break;
+            case "average-customer-satisfaction":
+                context.getBean(AverageCustomerSatisfactionService.class).run();
+                break;
+            case "average-item-price-per-store":
+                context.getBean(AverageItemPricePerStoreService.class).run();
+                break;
+            case "count-distinct-customers":
+                context.getBean(CountDistinctCustomersService.class).run();
+                break;
+            case "total-sales-by-day-of-week":
+                context.getBean(TotalSalesByDayOfWeekService.class).run();
+                break;
+            case "sales-performance":
+                context.getBean(SalesPerformanceService.class).run();
+                break;
+            case "revenue-by-location":
+                context.getBean(RevenueByLocationService.class).run();
                 break;
             case "read":
             default:
