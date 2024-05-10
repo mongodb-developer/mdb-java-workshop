@@ -1,5 +1,8 @@
 package com.mongodb.quickstart;
 
+import com.mongodb.quickstart.csfle.ClientSideFieldLevelEncryption;
+import com.mongodb.quickstart.transactions.ChangeStreams;
+import com.mongodb.quickstart.transactions.Transactions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -65,6 +68,15 @@ public class Application implements CommandLineRunner {
                 break;
             case "revenue-by-location":
                 context.getBean(RevenueByLocationService.class).run();
+                break;
+            case "change-streams":
+                context.getBean(ChangeStreams.class).run();
+                break;
+            case "transactions":
+                context.getBean(Transactions.class).run();
+                break;
+            case "csfle":
+                context.getBean(ClientSideFieldLevelEncryption.class).run();
                 break;
             case "read":
             default:

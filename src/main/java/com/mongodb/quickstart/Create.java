@@ -4,10 +4,8 @@ import com.mongodb.quickstart.models.Grade;
 import com.mongodb.quickstart.models.Score;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.boot.SpringApplication;
 import org.springframework.stereotype.Component;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+
 
 import java.util.ArrayList;
 import java.util.List;

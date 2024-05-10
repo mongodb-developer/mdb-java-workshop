@@ -14,12 +14,6 @@ To get started with MongoDB Atlas and get a free cluster read [this blog post](h
 - Java 21
 - Maven 3.8+
 
-# MongoDB URI
-
-Add MongoDB Atlas Cluster URI in # src/main/resources/application.properties:
-```
-spring.data.mongodb.uri=mongodb+srv://<user>:<password>@<Cluster>>t/?retryWrites=true&w=majority
-```
 
 # Command lines
 
@@ -30,6 +24,13 @@ mvn clean compile
 ```
 
 ## Session 1
+
+### Application.properties
+
+Add MongoDB Atlas  URI in # src/main/resources/application.properties:
+```
+spring.data.mongodb.uri=mongodb+srv://<user>:<password>@<Cluster>>t/?retryWrites=true&w=majority
+```
 
 - Run the `Create` class:
 
@@ -103,3 +104,34 @@ mvn spring-boot:run -Dspring-boot.run.arguments=revenue-by-location
 ```
 
 ## Session 3
+
+### Application.properties
+
+Add the MongoDB Atlas URI in # src/main/resources/application.properties:
+```
+mongodb.uri=mongodb+srv://<user>:<password>@<Cluster>>t/?retryWrites=true&w=majority
+```
+
+### Transactions
+
+Always start the `ChangeStreams` class in the `transactions` package first because it creates the `product` collection with the required JSON Schema. See the related blog post.
+
+- Run the `ChangeStreams` class:
+
+```sh
+mvn spring-boot:run -Dspring-boot.run.arguments="change-streams"
+```
+
+- Run the `Transactions` class in a separate terminal:
+
+```sh
+mvn spring-boot:run -Dspring-boot.run.arguments="transactions"
+```
+
+### Client Side Encryption
+
+- Run the `ClientSideFieldLevelEncryption` class:
+```sh
+
+mvn spring-boot:run -Dspring-boot.run.arguments="csfle"
+```

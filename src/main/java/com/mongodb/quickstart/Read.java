@@ -2,7 +2,6 @@ package com.mongodb.quickstart;
 
 import com.mongodb.quickstart.models.Grade;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
