@@ -14,6 +14,13 @@ To get started with MongoDB Atlas and get a free cluster read [this blog post](h
 - Java 21
 - Maven 3.8+
 
+# MongoDB URI
+
+Add MongoDB Atlas Cluster URI in # src/main/resources/application.properties:
+```
+spring.data.mongodb.uri=mongodb+srv://<user>:<password>@<Cluster>>t/?retryWrites=true&w=majority
+```
+
 # Command lines
 
 - Compile: 
@@ -22,44 +29,33 @@ To get started with MongoDB Atlas and get a free cluster read [this blog post](h
 mvn clean compile
 ```
 
-- Run the `HelloMongoDB` class: 
-
-```sh
-mvn compile exec:java -Dexec.mainClass="com.mongodb.quickstart.HelloMongoDB"
-```
-- Run the `Connection` class: 
-
-```sh
-mvn compile exec:java -Dexec.mainClass="com.mongodb.quickstart.Connection" -Dmongodb.uri="mongodb+srv://USERNAME:PASSWORD@cluster0-abcde.mongodb.net/test?w=majority"
-```
-
 - Run the `Create` class:
 
 ```sh
-mvn compile exec:java -Dexec.mainClass="com.mongodb.quickstart.Create" -Dmongodb.uri="mongodb+srv://USERNAME:PASSWORD@cluster0-abcde.mongodb.net/test?w=majority"
+mvn spring-boot:run -Dspring-boot.run.arguments=create
 ```
 
 - Run the `Read` class:
 
 ```sh
-mvn compile exec:java -Dexec.mainClass="com.mongodb.quickstart.Read" -Dmongodb.uri="mongodb+srv://USERNAME:PASSWORD@cluster0-abcde.mongodb.net/test?w=majority"
+mvn spring-boot:run -Dspring-boot.run.arguments=read
 ```
 
 - Run the `Update` class:
 
 ```sh
-mvn compile exec:java -Dexec.mainClass="com.mongodb.quickstart.Update" -Dmongodb.uri="mongodb+srv://USERNAME:PASSWORD@cluster0-abcde.mongodb.net/test?w=majority"
+mvn spring-boot:run -Dspring-boot.run.arguments=update
 ```
 
 - Run the `Delete` class:
 
 ```sh
-mvn compile exec:java -Dexec.mainClass="com.mongodb.quickstart.Delete" -Dmongodb.uri="mongodb+srv://USERNAME:PASSWORD@cluster0-abcde.mongodb.net/test?w=majority"
+mvn spring-boot:run -Dspring-boot.run.arguments=delete
 ```
 
 - Run the `MappingPOJO` class:
 
 ```sh
-mvn compile exec:java -Dexec.mainClass="com.mongodb.quickstart.MappingPOJO" -Dmongodb.uri="mongodb+srv://USERNAME:PASSWORD@cluster0-abcde.mongodb.net/test?w=majority"
+mvn spring-boot:run -Dspring-boot.run.arguments=mapping
 ```
 
