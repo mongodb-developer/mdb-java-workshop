@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-@Component("averageCustomerSatisfaction")
+@Component
 public class AverageCustomerSatisfactionService implements Runnable {
 
     @Autowired

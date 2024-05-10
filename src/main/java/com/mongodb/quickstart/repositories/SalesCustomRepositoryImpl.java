@@ -1,6 +1,7 @@
 package com.mongodb.quickstart.repositories;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.aggregation.Aggregation;
@@ -25,6 +26,7 @@ import com.mongodb.quickstart.dtos.TotalSalesByLocationDTO;
 import java.util.List;
 
 @Repository
+@Primary
 public class SalesCustomRepositoryImpl implements SalesCustomRepository {
 
 	@Autowired

@@ -15,7 +15,7 @@
         <maven-compiler-plugin.version>3.12.1</maven-compiler-plugin.version>
         <mongodb-driver-sync.version>5.0.0</mongodb-driver-sync.version>
         <mongodb-crypt.version>1.8.0</mongodb-crypt.version>
-        <spring-boot.version>3.2.0</spring-boot.version>
+        <spring-boot.version>3.2.5</spring-boot.version>
         <exec-maven-plugin.version>3.1.1</exec-maven-plugin.version>
     </properties>
 
@@ -32,23 +32,21 @@
             <artifactId>mongodb-crypt</artifactId>
             <version>${mongodb-crypt.version}</version>
         </dependency>
-        <!-- Spring Boot Starter (Excluding Logging) -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter</artifactId>
-            <version>${spring-boot.version}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-starter-logging</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
         <!-- Spring Boot Starter Data MongoDB -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-mongodb</artifactId>
             <version>${spring-boot.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.4.14</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>2.0.13</version> <!-- Ensure version compatibility -->
         </dependency>
     </dependencies>
 
@@ -57,6 +55,10 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>${spring-boot.version}</version>
+                <configuration>
+                    <mainClass>com.mongodb.quickstart.Application</mainClass> <!-- Your main class -->
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -73,7 +75,7 @@
                 <version>${exec-maven-plugin.version}</version>
                 <configuration>
                     <cleanupDaemonThreads>false</cleanupDaemonThreads>
-                    <mainClass>com.mongodb.quickstart.Application</mainClass> <!-- Specify your Application class -->
+                    <mainClass>com.mongodb.quickstart.Application</mainClass> <!-- Your main class -->
                 </configuration>
             </plugin>
         </plugins>
