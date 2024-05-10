@@ -3,7 +3,6 @@ package com.mongodb.quickstart.models;
 import java.util.Objects;
 
 public class Score {
-
     private String type;
     private Double score;
 
@@ -27,21 +26,19 @@ public class Score {
 
     @Override
     public String toString() {
-        final StringBuffer sb = new StringBuffer("Score{");
-        sb.append("type='").append(type).append('\'');
-        sb.append(", score=").append(score);
-        sb.append('}');
-        return sb.toString();
+        return "Score{" +
+                "type='" + type + '\'' +
+                ", score=" + score +
+                '}';
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o)
-            return true;
-        if (o == null || getClass() != o.getClass())
-            return false;
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
         Score score1 = (Score) o;
-        return Objects.equals(type, score1.type) && Objects.equals(score, score1.score);
+        return Objects.equals(type, score1.type) &&
+                Objects.equals(score, score1.score);
     }
 
     @Override

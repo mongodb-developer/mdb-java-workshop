@@ -1,19 +1,19 @@
 package com.mongodb.quickstart.models;
 
-import org.bson.codecs.pojo.annotations.BsonProperty;
 import org.bson.types.ObjectId;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
-import java.util.Objects;
 
+@Document(collection = "grades")
 public class Grade {
-
+    @Id
     private ObjectId id;
-    @BsonProperty(value = "student_id")
     private Double studentId;
-    @BsonProperty(value = "class_id")
     private Double classId;
     private List<Score> scores;
+    private String comment;
 
     public ObjectId getId() {
         return id;
@@ -51,31 +51,23 @@ public class Grade {
         return this;
     }
 
+    public String getComment() {
+        return comment;
+    }
+
+    public Grade setComment(String comment) {
+        this.comment = comment;
+        return this;
+    }
+
     @Override
     public String toString() {
-        final StringBuffer sb = new StringBuffer("Grade{");
-        sb.append("id=").append(id);
-        sb.append(", student_id=").append(studentId);
-        sb.append(", class_id=").append(classId);
-        sb.append(", scores=").append(scores);
-        sb.append('}');
-        return sb.toString();
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o)
-            return true;
-        if (o == null || getClass() != o.getClass())
-            return false;
-        Grade grade = (Grade) o;
-        return Objects.equals(id, grade.id) && Objects.equals(studentId, grade.studentId) && Objects.equals(classId,
-                                                                                                            grade.classId) && Objects
-                .equals(scores, grade.scores);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, studentId, classId, scores);
+        return "Grade{" +
+                "id=" + id +
+                ", studentId=" + studentId +
+                ", classId=" + classId +
+                ", scores=" + scores +
+                ", comment='" + comment + '\'' +
+                '}';
     }
 }
