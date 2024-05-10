@@ -29,6 +29,8 @@ spring.data.mongodb.uri=mongodb+srv://<user>:<password>@<Cluster>>t/?retryWrites
 mvn clean compile
 ```
 
+## Session 1
+
 - Run the `Create` class:
 
 ```sh
@@ -59,3 +61,44 @@ mvn spring-boot:run -Dspring-boot.run.arguments=delete
 mvn spring-boot:run -Dspring-boot.run.arguments=mapping
 ```
 
+## Session 2
+
+- Run the `TotalSalesByLocationService` class:
+
+```sh
+ mvn spring-boot:run -Dspring-boot.run.arguments=total-sales-by-location
+```
+
+- Run the `AverageCustomerSatisfactionService` class:
+
+```sh
+mvn spring-boot:run -Dspring-boot.run.arguments=average-customer-satisfaction
+```
+
+- Run the `AverageItemPricePerStoreService` class:
+```sh
+mvn spring-boot:run -Dspring-boot.run.arguments=average-item-price-per-store
+```
+
+- Run the `CountDistinctCustomersService` class:
+
+```sh
+mvn spring-boot:run -Dspring-boot.run.arguments=count-distinct-customers
+```
+
+- Run the `TotalSalesByDayOfWeekService` class:
+```sh
+mvn spring-boot:run -Dspring-boot.run.arguments=total-sales-by-day-of-week
+```
+
+- Run the `SalesPerformanceService` class:
+```sh
+mvn spring-boot:run -Dspring-boot.run.arguments=sales-performance
+```
+
+- Run the `RevenueByLocationService` class:
+```sh
+mvn spring-boot:run -Dspring-boot.run.arguments=revenue-by-location
+```
+
+## Session 3
