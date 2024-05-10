@@ -62,6 +62,7 @@ mvn spring-boot:run -Dspring-boot.run.arguments=mapping
 ```
 
 ## Session 2
+For this session make sure to switch to the `sample_supplies` database in your `application.properties`.
 
 - Run the `TotalSalesByLocationService` class:
 
