@@ -16,24 +16,44 @@ public class Read {
     public void run() {
         try {
             // Find a grade by student ID
-            Grade grade = repository.findByStudentId(10000d);
+            Grade grade = null;
+            
+            // add your solution here
+            
             System.out.println("Student 1 (via Repository): " + (grade != null ? grade : "No data found"));
 
-            // Find all grades with student IDs greater than or equal to 10000
-            List<Grade> gradesList = repository.findByStudentIdGreaterThanEqual(10000d);
+        } catch (Exception e) {
+            System.err.println("Failed to find a grade by student ID: " + e.getMessage());
+            e.printStackTrace();
+        }
+        
+        try {
+        	// Find all grades with student IDs greater than or equal to 10000
+            List<Grade> gradesList = null;
+            
+            // add your solution here
+            
             System.out.println("Student list with a cursor:");
             for (Grade student : gradesList) {
                 System.out.println(student);
             }
-
-            // Find all grades by student ID and limit by class ID
-            List<Grade> docs = repository.findByStudentIdAndClassIdLessThanEqual(10001d, 5d);
+        } catch (Exception e) {
+        	System.err.println("Failed to find all grades with student IDs greater than or equal to 10000: " + e.getMessage());
+            e.printStackTrace();
+        }
+        
+        try {
+        	// Find all grades by student ID and limit by class ID
+            List<Grade> docs = null;
+            
+            // add your solution here
+            
             System.out.println("Student sorted, skipped, limited, and projected:");
             for (Grade student : docs) {
                 System.out.println(student);
             }
         } catch (Exception e) {
-            System.err.println("Exception occurred: " + e.getMessage());
+        	System.err.println("Failed to find all grades by student ID and limit by class ID: " + e.getMessage());
             e.printStackTrace();
         }
     }

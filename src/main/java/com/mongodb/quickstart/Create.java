@@ -22,26 +22,38 @@ public class Create {
     private static final Random rand = new Random();
 
     public void run() {
-        // Insert one document
-        Grade grade1 = new Grade()
-                .setId(new ObjectId())
-                .setStudentId(10000d)
-                .setClassId(1d)
-                .setScores(generateScores());
-        repository.save(grade1);
-        System.out.println("One grade inserted for studentId 10000.");
-
-        // Insert many documents
-        List<Grade> grades = new ArrayList<>();
-        for (double classId = 1d; classId <= 10d; classId++) {
-            grades.add(new Grade()
+        try {
+            // Insert one document
+            Grade grade1 = new Grade()
                     .setId(new ObjectId())
-                    .setStudentId(10001d)
-                    .setClassId(classId)
-                    .setScores(generateScores()));
+                    .setStudentId(10000d) // Example: Change the student ID as needed
+                    .setClassId(1d)       // Example: Change the class ID as needed
+                    .setScores(generateScores());
+            
+         // add your solution here
+            
+            System.out.println("One grade inserted for studentId 10000.");
+        } catch (Exception e) {
+            System.err.println("Failed to insert grade for studentId 10000: " + e.getMessage());
         }
-        repository.saveAll(grades);
-        System.out.println("Ten grades inserted for studentId 10001.");
+
+        try {
+            // Insert many documents
+            List<Grade> grades = new ArrayList<>();
+            for (double classId = 1d; classId <= 10d; classId++) {
+                grades.add(new Grade()
+                        .setId(new ObjectId())
+                        .setStudentId(10001d)
+                        .setClassId(classId)
+                        .setScores(generateScores()));
+            }
+            
+         // add your solution here
+
+            System.out.println("Ten grades inserted for studentId 10001.");
+        } catch (Exception e) {
+            System.err.println("Failed to insert grades for studentId 10001: " + e.getMessage());
+        }
     }
 
     private static List<Score> generateScores() {

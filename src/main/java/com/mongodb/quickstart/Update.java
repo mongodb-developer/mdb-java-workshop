@@ -6,7 +6,6 @@ import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-
 import java.util.List;
 
 @Component
@@ -16,38 +15,71 @@ public class Update {
     private StudentRepository repository;
 
     public void run() {
-        // Update one document by adding a comment
-        Grade grade = repository.findByStudentId(10000d);
-        if (grade != null) {
-            Grade updatedGrade = repository.save(grade);
-            System.out.println("Grade updated: " + updatedGrade);
+        try {
+            // Update one document by adding a comment
+            Grade grade = repository.findByStudentId(10000d);
+            if (grade != null) {
+                Grade updatedGrade = null;
+                
+                // your solution here
+                
+                System.out.println("Grade updated: " + updatedGrade);
+            } else {
+                System.out.println("No grade found for studentId 10000.");
+            }
+        } catch (Exception e) {
+            System.err.println("Failed to update grade for studentId 10000: " + e.getMessage());
         }
 
-        // Upsert a document
-        grade = repository.findByStudentIdAndClassId(10002d, 10d);
-        if (grade == null) {
-            grade = new Grade()
-                    .setId(new ObjectId())
-                    .setStudentId(10002d)
-                    .setClassId(10d)
-                    .setScores(List.of(new Score().setType("homework").setScore(50d)))
-                    .setComment("You will learn a lot if you read the MongoDB blog!");
-        } else {
-            grade.getScores().add(new Score().setType("quiz").setScore(70d));
+        try {
+            // Upsert a document
+        	Grade grade = repository.findByStudentIdAndClassId(10002d, 10d);
+        	
+            if (grade == null) {
+                grade = new Grade()
+                        .setId(new ObjectId())
+                        .setStudentId(10002d)
+                        .setClassId(10d)
+                        .setScores(List.of(new Score().setType("homework").setScore(50d)))
+                        .setComment("You will learn a lot if you read the MongoDB blog!");
+            } else {
+                grade.getScores().add(new Score().setType("quiz").setScore(70d));
+            }
+            
+            Grade upsertedGrade = null;
+            
+            // your solution here
+            
+            System.out.println("Upserted grade: " + upsertedGrade);
+        } catch (Exception e) {
+            System.err.println("Failed to upsert grade for studentId 10002: " + e.getMessage());
         }
-        Grade upsertedGrade = repository.save(grade);
-        System.out.println("Upserted grade: " + upsertedGrade);
 
-        // Update many documents
-        List<Grade> grades = repository.findByStudentIdGreaterThanEqual(10001d);
-        repository.saveAll(grades);
-        System.out.println("Updated all grades with student_id >= 10001.");
+        try {
+            // Update many documents
+            List<Grade> grades = repository.findByStudentIdGreaterThanEqual(10001d);
+            
+            // your solution here
+            
+            System.out.println("Updated all grades with student_id >= 10001.");
+        } catch (Exception e) {
+            System.err.println("Failed to update multiple grades: " + e.getMessage());
+        }
 
-        // Find and update
-        grade = repository.findByStudentId(10000d);
-        if (grade != null) {
-            Grade updated = repository.save(grade);
-            System.out.println("Updated grade after finding: " + updated);
+        try {
+            // Find and update
+        	Grade grade = repository.findByStudentId(10000d);
+            if (grade != null) {
+            	Grade updated = null;
+            	
+            	// your solution here
+            	
+                System.out.println("Updated grade after finding: " + updated);
+            } else {
+                System.out.println("No grade found for update on studentId 10000.");
+            }
+        } catch (Exception e) {
+            System.err.println("Failed to find and update grade: " + e.getMessage());
         }
     }
 }

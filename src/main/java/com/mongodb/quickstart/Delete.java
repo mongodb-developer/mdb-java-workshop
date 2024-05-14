@@ -14,26 +14,54 @@ public class Delete {
     private StudentRepository repository;
 
     public void run() {
-        // Delete one document
-        Grade grade = repository.findByStudentId(10000d);
-        if (grade != null) {
-            repository.delete(grade);
-            System.out.println("Deleted grade: " + grade);
+        try {
+            // Delete one document
+            Grade grade = repository.findByStudentId(10000d);
+            if (grade != null) {
+
+            	// add your solution here
+            	
+                System.out.println("Deleted grade: " + grade);
+            } else {
+                System.out.println("No grade found to delete for studentId 10000.");
+            }
+        } catch (Exception e) {
+            System.err.println("Failed to delete grade for studentId 10000: " + e.getMessage());
         }
 
-        // Find and delete one document
-        grade = repository.findByStudentId(10002d);
-        if (grade != null) {
-            repository.delete(grade);
-            System.out.println("Deleted grade: " + grade);
+        try {
+            // Find and delete one document
+            Grade grade = repository.findByStudentId(10002d);
+            if (grade != null) {
+
+            	// add your solution here
+            	
+                System.out.println("Deleted grade: " + grade);
+            } else {
+                System.out.println("No grade found to delete for studentId 10002.");
+            }
+        } catch (Exception e) {
+            System.err.println("Failed to delete grade for studentId 10002: " + e.getMessage());
         }
 
-        // Delete many documents
-        repository.deleteAll(repository.findByStudentIdGreaterThanEqual(10000d));
-        System.out.println("Deleted all grades with student_id >= 10000.");
+        try {
+            // Delete many documents
+        	
+        	// add your solution here
+        	
+            System.out.println("Deleted all grades with student_id >= 10000.");
+        } catch (Exception e) {
+            System.err.println("Failed to delete multiple grades: " + e.getMessage());
+        }
 
-        // Drop entire collection
-        repository.deleteAll();
-        System.out.println("Deleted the entire grades collection.");
+        try {
+            // Drop entire collection
+
+        	// add your solution here
+        	
+            System.out.println("Deleted the entire grades collection.");
+        } catch (Exception e) {
+            System.err.println("Failed to delete the entire grades collection: " + e.getMessage());
+        }
     }
 }

@@ -3,3 +3,6 @@
 .idea/
 target/
 master_key.txt
+*.prefs
+.project
+.classpath
