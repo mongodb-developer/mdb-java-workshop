@@ -54,21 +54,35 @@ public class SalesCustomRepositoryImpl implements SalesCustomRepository {
 	 * Question 2: Customer Satisfaction by Location
 	 * 
 	 * Calculate the average customer satisfaction rating for each store location,
-	 * based on a 'satisfactionRating' field in each sale document. Only accept
-	 * satisfaction ratings thats are greater than 1.
+	 * based on a 'customer.satisfaction' field in each sale document. Only accept
+	 * satisfaction ratings thats are greater than or equal to 1.
 	 */
 	@Override
 	public List<CustomerSatisfactionDTO> averageCustomerSatisfactionByLocation() {
-		MatchOperation matchStage = Aggregation.match(new Criteria("satisfactionScore").gte(1));
-		GroupOperation groupStage = Aggregation.group("storeLocation").avg("satisfactionScore")
-				.as("averageSatisfaction");
+	    // Match documents where customer satisfaction is greater than or equal to 1
+	    MatchOperation matchStage = Aggregation.match(Criteria.where("customer.satisfaction").gte(1));
 
-		Aggregation aggregation = Aggregation.newAggregation(matchStage, groupStage);
+	    // Group by store location and calculate average satisfaction
+	    GroupOperation groupStage = Aggregation.group("storeLocation")
+	        .avg("customer.satisfaction").as("averageSatisfaction");
 
-		AggregationResults<CustomerSatisfactionDTO> results = mongoTemplate.aggregate(aggregation, "customerFeedback",
-				CustomerSatisfactionDTO.class);
+	    // Project the results to match the structure of CustomerSatisfactionDTO
+	    ProjectionOperation projectStage = Aggregation.project()
+	        .andExpression("_id").as("storeLocation")
+	        .andExpression("averageSatisfaction").as("averageSatisfaction");
 
-		return results.getMappedResults();
+	    // Define the aggregation pipeline with match, group, and project stages
+	    Aggregation aggregation = Aggregation.newAggregation(matchStage, groupStage, projectStage);
+
+	    // Execute the aggregation and retrieve the results
+	    AggregationResults<CustomerSatisfactionDTO> results = mongoTemplate.aggregate(aggregation, "sales",
+	            CustomerSatisfactionDTO.class);
+
+	    // Optionally print each result (for debugging purposes or logging)
+	    results.getMappedResults().forEach(result -> System.out.println(result));
+
+	    // Return the results as a list of DTOs
+	    return results.getMappedResults();
 	}
 
 	/**
@@ -155,13 +169,22 @@ public class SalesCustomRepositoryImpl implements SalesCustomRepository {
 	@Override
 	public List<SalesPerformanceDTO> compareSalesWithAndWithoutCoupons() {
 		GroupOperation groupStage = Aggregation.group("storeLocation")
-				.sum(ConditionalOperators.Cond.newBuilder().when(Criteria.where("couponUsed").is(true)).then(1)
+				.sum(ConditionalOperators.Cond.newBuilder()
+						.when(Criteria.where("couponUsed").is(true))
+						.then(1)
 						.otherwise(0))
-				.as("salesWithCoupons").sum(ConditionalOperators.Cond.newBuilder()
-						.when(Criteria.where("couponUsed").is(false)).then(1).otherwise(0))
+				.as("salesWithCoupons")
+				.sum(ConditionalOperators.Cond.newBuilder()
+						.when(Criteria.where("couponUsed").is(false))
+						.then(1).otherwise(0))
 				.as("salesWithoutCoupons");
+		
+	    ProjectionOperation projectStage = Aggregation.project()
+	            .andExpression("_id").as("storeLocation")
+	            .andExpression("salesWithCoupons").as("salesWithCoupons")
+	            .andExpression("salesWithoutCoupons").as("salesWithoutCoupons");
 
-		Aggregation aggregation = Aggregation.newAggregation(groupStage);
+		Aggregation aggregation = Aggregation.newAggregation(groupStage, projectStage);
 		
 		AggregationResults<SalesPerformanceDTO> results = mongoTemplate.aggregate(aggregation, "sales",
 				SalesPerformanceDTO.class);
