@@ -59,29 +59,20 @@ public class SalesCustomRepositoryImpl implements SalesCustomRepository {
 	 */
 	@Override
 	public List<CustomerSatisfactionDTO> averageCustomerSatisfactionByLocation() {
-	    // Match documents where customer satisfaction is greater than or equal to 1
 	    MatchOperation matchStage = Aggregation.match(Criteria.where("customer.satisfaction").gte(1));
 
-	    // Group by store location and calculate average satisfaction
 	    GroupOperation groupStage = Aggregation.group("storeLocation")
 	        .avg("customer.satisfaction").as("averageSatisfaction");
 
-	    // Project the results to match the structure of CustomerSatisfactionDTO
 	    ProjectionOperation projectStage = Aggregation.project()
 	        .andExpression("_id").as("storeLocation")
 	        .andExpression("averageSatisfaction").as("averageSatisfaction");
 
-	    // Define the aggregation pipeline with match, group, and project stages
 	    Aggregation aggregation = Aggregation.newAggregation(matchStage, groupStage, projectStage);
 
-	    // Execute the aggregation and retrieve the results
 	    AggregationResults<CustomerSatisfactionDTO> results = mongoTemplate.aggregate(aggregation, "sales",
 	            CustomerSatisfactionDTO.class);
-
-	    // Optionally print each result (for debugging purposes or logging)
-	    results.getMappedResults().forEach(result -> System.out.println(result));
-
-	    // Return the results as a list of DTOs
+		
 	    return results.getMappedResults();
 	}
 
