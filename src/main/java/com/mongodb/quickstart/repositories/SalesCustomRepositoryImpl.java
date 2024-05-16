@@ -159,6 +159,7 @@ public class SalesCustomRepositoryImpl implements SalesCustomRepository {
 	    AggregationResults<RevenueByLocationDTO> results = mongoTemplate.aggregate(aggregation, "sales", RevenueByLocationDTO.class);
 
 	    return results.getMappedResults();
+	}
 
 	/**
 	 * Question 7: Sales Performance Before and After Applying Coupons
