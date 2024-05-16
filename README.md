@@ -92,14 +92,12 @@ mvn spring-boot:run -Dspring-boot.run.arguments=count-distinct-customers
 mvn spring-boot:run -Dspring-boot.run.arguments=total-sales-by-day-of-week
 ```
 
-- Run the `SalesPerformanceService` class:
-```sh
-mvn spring-boot:run -Dspring-boot.run.arguments=sales-performance
-```
-
 - Run the `RevenueByLocationService` class:
 ```sh
 mvn spring-boot:run -Dspring-boot.run.arguments=revenue-by-location
 ```
 
-## Session 3
+- Run the `SalesPerformanceService` class:
+```sh
+mvn spring-boot:run -Dspring-boot.run.arguments=sales-performance
+```
