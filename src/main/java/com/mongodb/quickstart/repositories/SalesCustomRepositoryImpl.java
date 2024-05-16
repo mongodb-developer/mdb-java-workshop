@@ -1,5 +1,6 @@
 package com.mongodb.quickstart.repositories;
 
+import org.bson.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.data.domain.Sort;
@@ -23,6 +24,7 @@ import com.mongodb.quickstart.dtos.SalesByDayOfWeekDTO;
 import com.mongodb.quickstart.dtos.SalesPerformanceDTO;
 import com.mongodb.quickstart.dtos.TotalSalesByLocationDTO;
 
+import java.util.Collections;
 import java.util.List;
 
 @Repository
@@ -40,12 +42,10 @@ public class SalesCustomRepositoryImpl implements SalesCustomRepository {
 	 */
 	@Override
 	public List<TotalSalesByLocationDTO> calculateTotalSalesByLocation() {
-		GroupOperation groupStage = Aggregation.group("storeLocation").count().as("totalSales");
-
-		Aggregation aggregation = Aggregation.newAggregation(groupStage);
-
-		AggregationResults<TotalSalesByLocationDTO> results = mongoTemplate.aggregate(aggregation, "sales",
-				TotalSalesByLocationDTO.class);
+		
+		// add your code here and edit the AggregationResults to return your results
+		
+		AggregationResults<TotalSalesByLocationDTO> results = new AggregationResults<>(Collections.emptyList(), new Document());
 
 		return results.getMappedResults();
 	}
@@ -59,29 +59,11 @@ public class SalesCustomRepositoryImpl implements SalesCustomRepository {
 	 */
 	@Override
 	public List<CustomerSatisfactionDTO> averageCustomerSatisfactionByLocation() {
-	    // Match documents where customer satisfaction is greater than or equal to 1
-	    MatchOperation matchStage = Aggregation.match(Criteria.where("customer.satisfaction").gte(1));
 
-	    // Group by store location and calculate average satisfaction
-	    GroupOperation groupStage = Aggregation.group("storeLocation")
-	        .avg("customer.satisfaction").as("averageSatisfaction");
+		// add your code here and edit the AggregationResults to return your results
+		
+	    AggregationResults<CustomerSatisfactionDTO> results = new AggregationResults<>(Collections.emptyList(), new Document());
 
-	    // Project the results to match the structure of CustomerSatisfactionDTO
-	    ProjectionOperation projectStage = Aggregation.project()
-	        .andExpression("_id").as("storeLocation")
-	        .andExpression("averageSatisfaction").as("averageSatisfaction");
-
-	    // Define the aggregation pipeline with match, group, and project stages
-	    Aggregation aggregation = Aggregation.newAggregation(matchStage, groupStage, projectStage);
-
-	    // Execute the aggregation and retrieve the results
-	    AggregationResults<CustomerSatisfactionDTO> results = mongoTemplate.aggregate(aggregation, "sales",
-	            CustomerSatisfactionDTO.class);
-
-	    // Optionally print each result (for debugging purposes or logging)
-	    results.getMappedResults().forEach(result -> System.out.println(result));
-
-	    // Return the results as a list of DTOs
 	    return results.getMappedResults();
 	}
 
@@ -93,13 +75,10 @@ public class SalesCustomRepositoryImpl implements SalesCustomRepository {
 	 */
 	@Override
 	public List<AverageItemPricePerStoreDTO> averageItemPricePerStore() {
-		UnwindOperation unwindStage = Aggregation.unwind("items");
-		GroupOperation groupStage = Aggregation.group("storeLocation").avg("items.price").as("averagePrice");
 		
-		Aggregation aggregation = Aggregation.newAggregation(unwindStage, groupStage);
+		// add your code here and edit the AggregationResults to return your results
 		
-		AggregationResults<AverageItemPricePerStoreDTO> results = mongoTemplate.aggregate(aggregation, "sales",
-				AverageItemPricePerStoreDTO.class);
+	    AggregationResults<AverageItemPricePerStoreDTO> results = new AggregationResults<>(Collections.emptyList(), new Document());
 		
 		return results.getMappedResults();
 	}
@@ -112,13 +91,10 @@ public class SalesCustomRepositoryImpl implements SalesCustomRepository {
 	 */
 	@Override
 	public List<DistinctCustomersCountDTO> countDistinctCustomersByLocation() {
-		GroupOperation groupStage = Aggregation.group("storeLocation").addToSet("customer").as("uniqueCustomers");
-		ProjectionOperation projectStage = Aggregation.project().andExpression("size(uniqueCustomers)").as("count");
 		
-		Aggregation aggregation = Aggregation.newAggregation(groupStage, projectStage);
+		// add your code here and edit the AggregationResults to return your results
 		
-		AggregationResults<DistinctCustomersCountDTO> results = mongoTemplate.aggregate(aggregation, "sales",
-				DistinctCustomersCountDTO.class);
+	    AggregationResults<DistinctCustomersCountDTO> results = new AggregationResults<>(Collections.emptyList(), new Document());
 		
 		return results.getMappedResults();
 	}
@@ -130,12 +106,10 @@ public class SalesCustomRepositoryImpl implements SalesCustomRepository {
 	 */
 	@Override
 	public List<SalesByDayOfWeekDTO> totalSalesByDayOfWeek() {
-		ProjectionOperation projectStage = Aggregation.project().andExpression("dayOfWeek(saleDate)").as("dayOfWeek");
-		GroupOperation groupStage = Aggregation.group("dayOfWeek").count().as("totalSales");
-		Aggregation aggregation = Aggregation.newAggregation(projectStage, groupStage);
+
+		// add your code here and edit the AggregationResults to return your results
 		
-		AggregationResults<SalesByDayOfWeekDTO> results = mongoTemplate.aggregate(aggregation, "sales",
-				SalesByDayOfWeekDTO.class);
+	    AggregationResults<SalesByDayOfWeekDTO> results = new AggregationResults<>(Collections.emptyList(), new Document());
 		
 		return results.getMappedResults();
 	}
@@ -148,16 +122,12 @@ public class SalesCustomRepositoryImpl implements SalesCustomRepository {
 	 */
 	@Override
 	public List<RevenueByLocationDTO> calculateTotalRevenueByLocation() {
-		UnwindOperation unwindStage = Aggregation.unwind("items");
-		GroupOperation groupStage = Aggregation.group("storeLocation").sum("items.price").as("totalRevenue");
-		SortOperation sortStage = Aggregation.sort(Sort.by(Sort.Direction.DESC, "totalRevenue"));
+	    
+		// add your code here and edit the AggregationResults to return your results
 		
-		Aggregation aggregation = Aggregation.newAggregation(unwindStage, groupStage, sortStage);
-		
-		AggregationResults<RevenueByLocationDTO> results = mongoTemplate.aggregate(aggregation, "sales",
-				RevenueByLocationDTO.class);
-		
-		return results.getMappedResults();
+	    AggregationResults<RevenueByLocationDTO> results = new AggregationResults<>(Collections.emptyList(), new Document());
+
+	    return results.getMappedResults();
 	}
 
 	/**
@@ -168,26 +138,10 @@ public class SalesCustomRepositoryImpl implements SalesCustomRepository {
 	 */
 	@Override
 	public List<SalesPerformanceDTO> compareSalesWithAndWithoutCoupons() {
-		GroupOperation groupStage = Aggregation.group("storeLocation")
-				.sum(ConditionalOperators.Cond.newBuilder()
-						.when(Criteria.where("couponUsed").is(true))
-						.then(1)
-						.otherwise(0))
-				.as("salesWithCoupons")
-				.sum(ConditionalOperators.Cond.newBuilder()
-						.when(Criteria.where("couponUsed").is(false))
-						.then(1).otherwise(0))
-				.as("salesWithoutCoupons");
 		
-	    ProjectionOperation projectStage = Aggregation.project()
-	            .andExpression("_id").as("storeLocation")
-	            .andExpression("salesWithCoupons").as("salesWithCoupons")
-	            .andExpression("salesWithoutCoupons").as("salesWithoutCoupons");
-
-		Aggregation aggregation = Aggregation.newAggregation(groupStage, projectStage);
+		// add your code here and edit the AggregationResults to return your results
 		
-		AggregationResults<SalesPerformanceDTO> results = mongoTemplate.aggregate(aggregation, "sales",
-				SalesPerformanceDTO.class);
+	    AggregationResults<SalesPerformanceDTO> results = new AggregationResults<>(Collections.emptyList(), new Document());
 		
 		return results.getMappedResults();
 	}
