@@ -148,17 +148,26 @@ public class SalesCustomRepositoryImpl implements SalesCustomRepository {
 	 */
 	@Override
 	public List<RevenueByLocationDTO> calculateTotalRevenueByLocation() {
-		UnwindOperation unwindStage = Aggregation.unwind("items");
-		GroupOperation groupStage = Aggregation.group("storeLocation").sum("items.price").as("totalRevenue");
-		SortOperation sortStage = Aggregation.sort(Sort.by(Sort.Direction.DESC, "totalRevenue"));
-		
-		Aggregation aggregation = Aggregation.newAggregation(unwindStage, groupStage, sortStage);
-		
-		AggregationResults<RevenueByLocationDTO> results = mongoTemplate.aggregate(aggregation, "sales",
-				RevenueByLocationDTO.class);
-		
-		return results.getMappedResults();
-	}
+	    UnwindOperation unwindStage = Aggregation.unwind("items");
+	    
+	    ProjectionOperation projectStage = Aggregation.project("storeLocation")
+	            .and("items.price").as("price")
+	            .and("items.quantity").as("quantity")
+	            .andExpression("items.price * items.quantity").as("total");
+
+	    GroupOperation groupStage = Aggregation.group("storeLocation")
+	            .sum("total").as("totalRevenue");
+
+	    ProjectionOperation finalProjectStage = Aggregation.project("totalRevenue")
+	            .and("_id").as("storeLocation");
+
+	    SortOperation sortStage = Aggregation.sort(Sort.by(Sort.Direction.DESC, "totalRevenue"));
+
+	    Aggregation aggregation = Aggregation.newAggregation(unwindStage, projectStage, groupStage, finalProjectStage, sortStage);
+
+	    AggregationResults<RevenueByLocationDTO> results = mongoTemplate.aggregate(aggregation, "sales", RevenueByLocationDTO.class);
+
+	    return results.getMappedResults();
 
 	/**
 	 * Question 7: Sales Performance Before and After Applying Coupons
