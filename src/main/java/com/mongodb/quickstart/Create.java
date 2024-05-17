@@ -26,11 +26,13 @@ public class Create {
             // Insert one document
             Grade grade1 = new Grade()
                     .setId(new ObjectId())
-                    .setStudentId(10000d) // Example: Change the student ID as needed
-                    .setClassId(1d)       // Example: Change the class ID as needed
+                    .setStudentId(10000d)
+                    .setClassId(1d)
                     .setScores(generateScores());
             
-         // add your solution here
+            //
+            // add your solution here
+            //
             
             System.out.println("One grade inserted for studentId 10000.");
         } catch (Exception e) {
@@ -48,8 +50,10 @@ public class Create {
                         .setScores(generateScores()));
             }
             
-         // add your solution here
-
+            //
+            // add your solution here
+            //
+            
             System.out.println("Ten grades inserted for studentId 10001.");
         } catch (Exception e) {
             System.err.println("Failed to insert grades for studentId 10001: " + e.getMessage());

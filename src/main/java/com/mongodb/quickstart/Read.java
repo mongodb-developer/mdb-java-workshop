@@ -18,7 +18,9 @@ public class Read {
             // Find a grade by student ID
             Grade grade = null;
             
+            //
             // add your solution here
+            //
             
             System.out.println("Student 1 (via Repository): " + (grade != null ? grade : "No data found"));
 
@@ -31,7 +33,9 @@ public class Read {
         	// Find all grades with student IDs greater than or equal to 10000
             List<Grade> gradesList = null;
             
+            //
             // add your solution here
+            //
             
             System.out.println("Student list with a cursor:");
             for (Grade student : gradesList) {
@@ -46,7 +50,9 @@ public class Read {
         	// Find all grades by student ID and limit by class ID
             List<Grade> docs = null;
             
+            //
             // add your solution here
+            //
             
             System.out.println("Student sorted, skipped, limited, and projected:");
             for (Grade student : docs) {

@@ -19,12 +19,14 @@ public class MappingPOJO{
 
     public void run() {
         // Create a new grade
-        Grade newGrade = new Grade()
-                .setId(new ObjectId())
-                .setStudentId(10003d)
-                .setClassId(10d)
-                .setScores(List.of(new Score().setType("homework").setScore(50d)));
-
+        Grade newGrade = null;
+        
+        
+        //
+        // add your code here
+        //
+        
+        
         repository.save(newGrade);
         System.out.println("Grade inserted: " + newGrade);
 
