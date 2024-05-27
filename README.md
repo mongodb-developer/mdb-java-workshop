@@ -18,7 +18,7 @@ To get started with MongoDB Atlas and get a free cluster read [this blog post](h
 
 Add MongoDB Atlas Cluster URI in # src/main/resources/application.properties:
 ```
-spring.data.mongodb.uri=mongodb+srv://<user>:<password>@<Cluster>>t/?retryWrites=true&w=majority
+spring.data.mongodb.uri=mongodb+srv://<user>:<password>@<Cluster>/?retryWrites=true&w=majority
 ```
 
 # Command lines
