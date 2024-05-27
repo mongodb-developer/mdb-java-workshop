@@ -45,6 +45,7 @@ public class Transactions {
         CodecRegistry codecRegistry = fromRegistries(MongoClientSettings.getDefaultCodecRegistry(), pojoCodecRegistry);
         MongoClientSettings clientSettings = MongoClientSettings.builder()
                                                                 .applyConnectionString(connectionString)
+                                                                .applicationName("devrel.springio.workshop.java")
                                                                 .codecRegistry(codecRegistry)
                                                                 .build();
         try (MongoClient client = MongoClients.create(clientSettings)) {

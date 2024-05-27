@@ -38,6 +38,7 @@ public class ConnectionHelper {
                                                            .build();
         MongoClientSettings mcs = MongoClientSettings.builder()
                                                      .applyConnectionString(CONNECTION_STR)
+                                                     .applicationName("devrel.springio.workshop.java")
                                                      .autoEncryptionSettings(aes)
                                                      .build();
         System.out.println("=> Creating MongoDB client with automatic decryption.");
