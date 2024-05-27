@@ -2,7 +2,6 @@ package com.mongodb.quickstart;
 
 import com.mongodb.quickstart.models.Grade;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -16,7 +15,7 @@ public class Read {
     public void run() {
         try {
             // Find a grade by student ID
-            Grade grade = repository.findByStudentId(10000d);
+            Grade grade = repository.findFirstByStudentId(10000d);
             System.out.println("Student 1 (via Repository): " + (grade != null ? grade : "No data found"));
 
             // Find all grades with student IDs greater than or equal to 10000

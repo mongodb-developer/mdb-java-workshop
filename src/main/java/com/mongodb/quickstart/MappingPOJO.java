@@ -4,8 +4,6 @@ import com.mongodb.quickstart.models.Grade;
 import com.mongodb.quickstart.models.Score;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.boot.SpringApplication;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -29,7 +27,7 @@ public class MappingPOJO{
         System.out.println("Grade inserted: " + newGrade);
 
         // Find this grade
-        Grade grade = repository.findByStudentId(10003d);
+        Grade grade = repository.findFirstByStudentId(10003d);
         System.out.println("Grade found: " + (grade != null ? grade : "No data found"));
 
         // Update this grade by adding an exam grade
