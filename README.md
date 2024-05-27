@@ -29,7 +29,7 @@ mvn clean compile
 
 Add MongoDB Atlas  URI in # src/main/resources/application.properties:
 ```
-spring.data.mongodb.uri=mongodb+srv://<user>:<password>@<Cluster>>t/?retryWrites=true&w=majority
+spring.data.mongodb.uri=mongodb+srv://<user>:<password>@<Cluster>/?retryWrites=true&w=majority
 ```
 
 - Run the `Create` class:
