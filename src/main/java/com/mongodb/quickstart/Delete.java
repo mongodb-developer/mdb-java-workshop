@@ -31,8 +31,5 @@ public class Delete {
         repository.deleteAll(repository.findByStudentIdGreaterThanEqual(10000d));
         System.out.println("Deleted all grades with student_id >= 10000.");
 
-        // Drop entire collection
-        repository.deleteAll();
-        System.out.println("Deleted the entire grades collection.");
     }
 }
