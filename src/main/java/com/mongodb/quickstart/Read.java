@@ -15,7 +15,7 @@ public class Read {
 
     public void run() {
         try {
-            // Find a grade by student ID
+            // Find grades by student ID
             Grade grade = null;
             
             //

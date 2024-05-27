@@ -16,7 +16,7 @@ public class Delete {
     public void run() {
         try {
             // Delete one document
-            Grade grade = repository.findByStudentId(10000d);
+            Grade grade = repository.findFirstByStudentId(10000d);
             if (grade != null) {
 
             	// add your solution here
@@ -31,7 +31,7 @@ public class Delete {
 
         try {
             // Find and delete one document
-            Grade grade = repository.findByStudentId(10002d);
+            Grade grade = repository.findFirstByStudentId(10002d);
             if (grade != null) {
 
             	// add your solution here

@@ -17,7 +17,7 @@ public class Update {
     public void run() {
         try {
             // Update one document by adding a comment
-            Grade grade = repository.findByStudentId(10000d);
+            Grade grade = repository.findFirstByStudentId(10000d);
             if (grade != null) {
                 Grade updatedGrade = null;
                 
@@ -74,7 +74,7 @@ public class Update {
 
         try {
             // Find and update
-        	Grade grade = repository.findByStudentId(10000d);
+        	Grade grade = repository.findFirstByStudentId(10000d);
             if (grade != null) {
             	Grade updated = null;
             	

@@ -31,7 +31,7 @@ public class MappingPOJO{
         System.out.println("Grade inserted: " + newGrade);
 
         // Find this grade
-        Grade grade = repository.findByStudentId(10003d);
+        Grade grade = repository.findFirstByStudentId(10003d);
         System.out.println("Grade found: " + (grade != null ? grade : "No data found"));
 
         // Update this grade by adding an exam grade
