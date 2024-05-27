@@ -53,15 +53,5 @@ public class Delete {
         } catch (Exception e) {
             System.err.println("Failed to delete multiple grades: " + e.getMessage());
         }
-
-        try {
-            // Drop entire collection
-
-        	// add your solution here
-        	
-            System.out.println("Deleted the entire grades collection.");
-        } catch (Exception e) {
-            System.err.println("Failed to delete the entire grades collection: " + e.getMessage());
-        }
     }
 }
