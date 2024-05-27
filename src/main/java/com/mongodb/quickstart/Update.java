@@ -17,7 +17,7 @@ public class Update {
 
     public void run() {
         // Update one document by adding a comment
-        Grade grade = repository.findByStudentId(10000d);
+        Grade grade = repository.findFirstByStudentId(10000d);
         if (grade != null) {
             Grade updatedGrade = repository.save(grade);
             System.out.println("Grade updated: " + updatedGrade);
@@ -44,7 +44,7 @@ public class Update {
         System.out.println("Updated all grades with student_id >= 10001.");
 
         // Find and update
-        grade = repository.findByStudentId(10000d);
+        grade = repository.findFirstByStudentId(10000d);
         if (grade != null) {
             Grade updated = repository.save(grade);
             System.out.println("Updated grade after finding: " + updated);

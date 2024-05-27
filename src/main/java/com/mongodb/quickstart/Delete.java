@@ -14,14 +14,14 @@ public class Delete {
 
     public void run() {
         // Delete one document
-        Grade grade = repository.findByStudentId(10000d);
+        Grade grade = repository.findFirstByStudentId(10000d);
         if (grade != null) {
             repository.delete(grade);
             System.out.println("Deleted grade: " + grade);
         }
 
         // Find and delete one document
-        grade = repository.findByStudentId(10002d);
+        grade = repository.findFirstByStudentId(10002d);
         if (grade != null) {
             repository.delete(grade);
             System.out.println("Deleted grade: " + grade);

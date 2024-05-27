@@ -15,7 +15,7 @@ public class Read {
     public void run() {
         try {
             // Find a grade by student ID
-            Grade grade = repository.findByStudentId(10000d);
+            Grade grade = repository.findFirstByStudentId(10000d);
             System.out.println("Student 1 (via Repository): " + (grade != null ? grade : "No data found"));
 
             // Find all grades with student IDs greater than or equal to 10000
