@@ -109,7 +109,7 @@ mvn spring-boot:run -Dspring-boot.run.arguments=revenue-by-location
 
 Add the MongoDB Atlas URI in # src/main/resources/application.properties:
 ```
-mongodb.uri=mongodb+srv://<user>:<password>@<Cluster>>t/?retryWrites=true&w=majority
+mongodb.uri=mongodb+srv://<user>:<password>@<Cluster>/?retryWrites=true&w=majority
 ```
 
 ### Transactions
